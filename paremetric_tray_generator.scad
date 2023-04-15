@@ -1,3 +1,16 @@
+// Copyright 2023 Stefano Linguerri
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 //Number of columns for this tray
 cols = 6;
 //Number of rows for this tray
@@ -53,7 +66,7 @@ module tray(cols, rows, height, base_size, adapted_base_size, inset) {
 module adapted_base_holes(cols, rows, height_offset, base_size, adapted_base_size,isRound_adapted) {
     
     gap = base_size - adapted_base_size;
-    echo(gap)
+
     for (c = [0:cols-1]){
         for (r = [0:rows-1]){
             translate( 
