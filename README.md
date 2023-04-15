@@ -46,3 +46,9 @@ A round 25mm to 25mm sample:
 
 <img src="main_round_02.png" alt= “sample” width="600" >
 
+## License
+
+Apache PredictionIO is under [Apache 2
+license](http://www.apache.org/licenses/LICENSE-2.0.html).
+
+
