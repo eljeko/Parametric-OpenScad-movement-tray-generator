@@ -1,4 +1,5 @@
 # Parametric OpenScad Movement tray generator
+![Movement tray generator](main.png "Movement tray generator")
 
 This is an [OpenScad](http://openscad.org/index.html) script that can generate a movement tray to adapt the Old school warhammer 20mm square base to the new Old World 25mm square base system.
 
@@ -33,3 +34,15 @@ The script can also generate a tray to adapt round bases setting ```isRound_adap
 ```inset``` Inset of the top of the tray: greater the value greater the slope of the tray
 
 ```isRound_adapted``` if base adapted are round (in this case adapted_base_size is considered as the diameter of the round base)
+
+## Samples
+
+A square 20mm to 25mm sample:
+
+<img src="sample_tray.png" alt= “sample” width="400" >
+
+
+A round 25mm to 25mm sample:
+
+<img src="main_round_02.png" alt= “sample” width="600" >
+
