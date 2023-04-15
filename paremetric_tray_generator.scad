@@ -88,6 +88,6 @@ difference(){
     if(!isRound_adapted){
         adapted_base_holes(cols, rows, height_offset, base_size, adapted_base_size, isRound_adapted);
     }else{
-        adapted_base_holes_round(cols, rows, height_offset, base_size, adapted_base_size, isRound_adapted);
+        adapted_base_holes_round(cols, rows, height_offset, base_size, adapted_base_size);
     }
 }
