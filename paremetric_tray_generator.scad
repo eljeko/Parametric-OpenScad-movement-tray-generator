@@ -20,7 +20,7 @@ height = 5;
 // square base size 
 base_size = 25;
 // square base size of adapted models
-adapted_base_size = 20;
+adapted_base_size = 21;
 //minimum bottom height (thickness) of the insets for the bases
 height_offset = 2;
 //Inset of the top of the tray: greater the value greater the slope of the tray
