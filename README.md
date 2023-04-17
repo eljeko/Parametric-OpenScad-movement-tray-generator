@@ -48,7 +48,7 @@ A round 25mm to 25mm sample:
 
 ## License
 
-Apache PredictionIO is under [Apache 2
+Parametric OpenScad movement tray generator is under [Apache 2
 license](http://www.apache.org/licenses/LICENSE-2.0.html).
 
 
