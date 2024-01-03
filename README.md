@@ -54,19 +54,19 @@ When setting the value for ```adapted_base_width```and ```adapted_base_length```
 
 ### Square 20mm to 25mm sample:
 
-<img src="sample_tray.png" alt= “sample” width="400" >
+<img src="sample_tray.png" alt= “square” width="400" >
 
 ### Round 25mm to 25mm sample:
 
-<img src="main_round_02.png" alt= “sample” width="600" >
+<img src="main_round_02.png" alt= “round” width="600" >
 
 ### Rectangular 25x50mm to 30x60mm sample:
 
-<img src="rectangular.png" alt= “sample” width="600" >
+<img src="rectangular.png" alt= “cavalry” width="600" >
 
 ### Magnets 3x1mm insets
 
-<img src="magnets.png" alt= “sample” width="600" >
+<img src="magnets.png" alt= “magnets” width="600" >
 
 
 ## License
