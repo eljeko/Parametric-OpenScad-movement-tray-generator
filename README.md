@@ -33,7 +33,7 @@ If you use different values for width and lenght you can generate also adapters 
 
 ```adapted_base_width``` existing base width of adapted models
 
-```adapted_base_length``` existing base lenght of adapted models
+```adapted_base_length``` existing base length of adapted models
 
 ```height_offset``` minimum bottom height (thickness) of the insets for the bases
 
@@ -43,15 +43,15 @@ If you use different values for width and lenght you can generate also adapters 
 
 ## Samples
 
-A square 20mm to 25mm sample:
+### Square 20mm to 25mm sample:
 
 <img src="sample_tray.png" alt= “sample” width="400" >
 
-A round 25mm to 25mm sample:
+### Round 25mm to 25mm sample:
 
 <img src="main_round_02.png" alt= “sample” width="600" >
 
-A rectangular 25x50mm to 30x60mm sample:
+### Rectangular 25x50mm to 30x60mm sample:
 
 <img src="rectangular.png" alt= “sample” width="600" >
 
