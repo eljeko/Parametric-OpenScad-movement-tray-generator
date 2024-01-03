@@ -23,7 +23,7 @@ new_base_width = 25;
 new_base_length = 25;
 // existing base width of adapted models
 adapted_base_width = 21;
-// existing base lenght of adapted models
+// existing base length of adapted models
 adapted_base_length = 21;
 //minimum bottom height (thickness) of the insets for the bases
 height_offset = 2;
