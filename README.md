@@ -19,6 +19,10 @@ The script can also generate a tray to adapt round bases setting ```isRound_adap
 
 If you use different values for width and lenght you can generate also adapters for cavalry
 
+## Important note
+
+When setting the value for ```adapted_base_width```and ```adapted_base_length``` add 1mm of tolerance eg: set 21mm for an old 20mm square base. The final "fit" depends also on you printer settings and calibration.  
+
 ### Parameters
 
 ```cols```  Number of columns for this tray
@@ -41,6 +45,11 @@ If you use different values for width and lenght you can generate also adapters 
 
 ```isRound_adapted``` if base adapted are round (in this case adapted_base_size is considered as the diameter of the round base)
 
+```magnets_height``` magnets height (if greater than zero will generate the insets)
+
+```magnets_radius``` magnets radius
+
+
 ## Samples
 
 ### Square 20mm to 25mm sample:
@@ -54,6 +63,10 @@ If you use different values for width and lenght you can generate also adapters 
 ### Rectangular 25x50mm to 30x60mm sample:
 
 <img src="rectangular.png" alt= “sample” width="600" >
+
+### Magnets 3x1mm insets
+
+<img src="magnets.png" alt= “sample” width="600" >
 
 
 ## License

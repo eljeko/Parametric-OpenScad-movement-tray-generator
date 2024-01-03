@@ -7,7 +7,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.¢
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -31,7 +31,10 @@ height_offset = 2;
 inset = 1;
 //if base adapted are round (in this case adapted_base_width is considered as the diameter of the round base)
 isRound_adapted = false;
-
+//magnets height (if greater than zero will generate the insets)
+magnets_height = 0;
+//magnets radius
+magnets_radius = 0;
 
 
 module tray(cols, rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset) {
@@ -100,12 +103,35 @@ module adapted_base_holes_round(cols, rows, height_offset, new_base_width, new_b
     }
 }
 
+module magnets_holes (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset) {
+    
+    for (c = [0:cols-1]){
+        for (r = [0:rows-1]){
+            translate( 
+                        [new_base_width/2 + new_base_width * c , //row
+                        new_base_length/2 + new_base_length * r, //col
+                        height_offset-magnets_height+0.01]
+            )
+            //resize([adapted_base_width,adapted_base_length]) 
+
+            cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);
+           
+        }
+    }
+}
+
 difference(){
     tray(cols, rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset);
     
+     if (magnets_height > 0){
+        echo ("magnets");
+        magnets_holes (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius,height, height_offset);
+    }
+
     if(!isRound_adapted){
         adapted_base_holes(cols, rows, height_offset, new_base_width, new_base_length, adapted_base_width, adapted_base_length);
     }else{
         adapted_base_holes_round(cols, rows, height_offset, new_base_width, new_base_length, adapted_base_width, adapted_base_length);
     }
+   
 }
