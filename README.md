@@ -19,9 +19,18 @@ The script can also generate a tray to adapt round bases setting ```isRound_adap
 
 If you use different values for width and lenght you can generate also adapters for cavalry
 
-## Important note
+# Important notes
+
+## Tolerance 
 
 When setting the value for ```adapted_base_width```and ```adapted_base_length``` add 1mm of tolerance eg: set 21mm for an old 20mm square base. The final "fit" depends also on you printer settings and calibration.  
+
+## Lance formation
+
+The lance formation tray doesn't have the inset/slope/chamfer (so ```inset``` values are ignored), this is due to the fact that OpenScad doesn't have a easy way to apply a chamfer: create the lance tray with a dynamic polyedron would be really "challenging" (at lest for me).
+
+Lance formation tray dosen't support magnets holes.
+
 
 ### Parameters
 
@@ -49,6 +58,8 @@ When setting the value for ```adapted_base_width```and ```adapted_base_length```
 
 ```magnets_radius``` magnets radius
 
+```isLanceFormation``` if the tray is for lance formation, use only the number of ```rows``` to genrate the tray
+
 
 ## Samples
 
@@ -64,9 +75,23 @@ When setting the value for ```adapted_base_width```and ```adapted_base_length```
 
 <img src="rectangular.png" alt= “cavalry” width="600" >
 
+### Holed tray
+
+This is particularly useful to glue a metal plate under the tray to use magnetized minis
+
+To obtain it just use a negative number for ```height_offset``` like -1
+
+<img src="holed.png" alt=“holed” width="600" >
+
 ### Magnets 3x1mm insets
 
 <img src="magnets.png" alt= “magnets” width="600" >
+
+### Lance Formation
+
+<img src="lance.png" alt= “lance” width="600" >
+
+
 
 
 ## License
