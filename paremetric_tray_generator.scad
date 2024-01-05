@@ -22,9 +22,9 @@ new_base_width = 25;
 //new base length 
 new_base_length = 25;
 // existing base width of adapted models
-adapted_base_width = 21;
+adapted_base_width = 21.1;
 // existing base length of adapted models
-adapted_base_length = 21;
+adapted_base_length = 21.1;
 //minimum bottom height (thickness) of the insets for the bases
 height_offset = 2;
 //Inset of the top of the tray: greater the value greater the slope of the tray
@@ -37,15 +37,17 @@ magnets_height = 0;
 magnets_radius = 0;
 //if the tray is for lance formation, use only the number of rows to genrate the tray
 isLanceFormation = false;
+//Create a standard (non an adpater) movement tray for given new_base_length x new_base_width
+createEmptyMovementTray = false;
 
 
-module tray(cols, rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset) {
+module tray(cols, rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset, margin_for_empty_tray) {
     
-        b_total_cols = new_base_width * cols;
-        b_total_rows = new_base_length * rows;
+        b_total_cols = (new_base_width * cols) + margin_for_empty_tray;
+        b_total_rows = (new_base_length * rows)+ margin_for_empty_tray;
         
-        t_total_cols = new_base_width * cols - inset *2;
-        t_total_rows = new_base_length * rows - inset *2;
+        t_total_cols = (new_base_width * cols - inset *2) + margin_for_empty_tray;
+        t_total_rows = (new_base_length * rows - inset *2) + margin_for_empty_tray;
         
          polyhedron(
             points=[
@@ -69,6 +71,21 @@ module tray(cols, rows, height, new_base_width, new_base_length, adapted_base_wi
                     ]
         ); 
    
+}
+
+//this module will create the hole in the "empty" classic movement tray
+module empty_tray_hole(cols, rows, height_offset, new_base_width,  new_base_length, adapted_base_width, adapted_base_length, inset, margin_for_empty_tray) {
+    
+    t_total_cols = (new_base_width * cols ) ;
+    t_total_rows = (new_base_length * rows);
+
+ 
+    translate( 
+                [margin_for_empty_tray/2, //row
+               margin_for_empty_tray/2, //col
+                height_offset]
+    )                       
+    cube([t_total_cols,t_total_rows+margin_for_empty_tray, 30]);            
 }
 
 module adapted_base_holes(cols, rows, height_offset, new_base_width,  new_base_length, adapted_base_width, adapted_base_length) {
@@ -134,12 +151,55 @@ module lance_formation (cols, rows,  new_base_width, new_base_length, magnets_he
                     //color([0.4, rands(0.01, 1,1)[0],rands(0.01, 1,1)[0] ])
                     color ([0.5, 0.5, 0.5])
                     {
-                        cube([new_base_width, new_base_length, height]);
+                        lance_sloped_slot(thisCol+1, thisRow+1 == rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset, 0);
                     }    
                 }
             }
         }
     }     
+}
+
+////////////////////////////////
+// LANCE FORMATION            //
+////////////////////////////////
+module lance_sloped_slot(cols, isLastRow, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset, margin_for_empty_tray) {
+    
+        rows = 1;
+    
+        b_total_cols = (new_base_width * cols) + margin_for_empty_tray;
+        b_total_rows = (new_base_length * rows)+ margin_for_empty_tray;
+        
+        t_total_cols = (new_base_width * cols - inset *2) + margin_for_empty_tray;
+        t_total_rows = (new_base_length * rows - inset *2) + margin_for_empty_tray;
+
+    
+
+        polyhedron(
+            points=[
+                    [0,0,0],                        //base bottom left
+                    [b_total_cols,0,0],             //base bottom right
+                    [b_total_cols,b_total_rows,0],  //base top right
+                    [0,b_total_rows,0],             //base top left
+        
+                    [inset,  inset,   height],                              //surface bottom left
+                    [inset + t_total_cols, inset,  height],                 //surface bottom right
+                    [inset + t_total_cols,  
+                        isLastRow ? inset + t_total_rows : inset*3 + t_total_rows, //if last row we set the slope otherwise we move the y of the point to reach the next row
+                        height],   //surface top right
+                    [inset, 
+                        isLastRow ? inset + t_total_rows : inset*3 + t_total_rows,//if last row we set the slope otherwise we move the y of the point to reach the next row
+                        height]//surface top left
+                ],
+            faces =[
+                        [0,1,2,3],
+                        [4,5,1,0],
+                        [5,6,2,1],
+                        [6,7,3,2],
+                        [7,4,0,3],
+                        [7,6,5,4]
+                    ]
+        ); 
+   
 }
 
 
@@ -162,31 +222,62 @@ module lance_formation_hole (cols, rows,  new_base_width, new_base_length, magne
     }     
 }
 
+module lance_formation_magnets_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset) {
+    
+    gap_w = new_base_width - adapted_base_width;
+    gap_l = new_base_length - adapted_base_length;
+    
+    for (thisRow = [0:rows-1]){    
+
+        translate( [0,(thisRow+1)*new_base_length-new_base_length/2,height_offset-magnets_height+0.01]){
+            for (thisCol = [0:thisRow]){                    
+                translate( [(new_base_width/2)*thisRow-(new_base_width*thisCol)+gap_w/2+new_base_width/2,0,0]){
+                    color([0.7, 0.7,0.7 ]){
+                        cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);
+                    }    
+                }
+            }
+        }
+    }     
+}
+
 if(!isLanceFormation){
-    difference(){
-        
+    difference(){        
             color ([0.5, 0.5, 0.5]) {
-                tray(cols, rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset);
+                if(!createEmptyMovementTray){
+                    tray(cols, rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset, 0);
+                }else{
+                    tray(cols, rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset, 3);
+                }
             }
             color ([0.7, 0.7, 0.7]) {
                 if (magnets_height > 0){
                     echo ("magnets");
                     magnets_holes (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius,height, height_offset);
                 }
-
-                if(!isRound_adapted){
-                    adapted_base_holes(cols, rows, height_offset, new_base_width, new_base_length, adapted_base_width, adapted_base_length);
+                if(!createEmptyMovementTray){
+                    if(!isRound_adapted){
+                        adapted_base_holes(cols, rows, height_offset, new_base_width, new_base_length, adapted_base_width, adapted_base_length);
+                    }else{
+                        adapted_base_holes_round(cols, rows, height_offset, new_base_width, new_base_length, adapted_base_width, adapted_base_length);
+                    }
                 }else{
-                    adapted_base_holes_round(cols, rows, height_offset, new_base_width, new_base_length, adapted_base_width, adapted_base_length);
+                    empty_tray_hole(cols, rows, height_offset, new_base_width,  new_base_length, adapted_base_width, adapted_base_length, inset, 3);
                 }
             }
         
     }
-}else{    
+}
+
+if(isLanceFormation){    
     difference(){      
         union() {
             lance_formation (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset);
         }        
         lance_formation_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset);    
+        if (magnets_height > 0){
+            echo ("magnets lance");
+            lance_formation_magnets_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius,height, height_offset);
+        }
     }
 }

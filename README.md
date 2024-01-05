@@ -27,10 +27,7 @@ When setting the value for ```adapted_base_width```and ```adapted_base_length```
 
 ## Lance formation
 
-The lance formation tray doesn't have the inset/slope/chamfer (so ```inset``` values are ignored), this is due to the fact that OpenScad doesn't have a easy way to apply a chamfer: create the lance tray with a dynamic polyedron would be really "challenging" (at lest for me).
-
-Lance formation tray dosen't support magnets holes.
-
+At the moment standard classic movement tray (the non adapter version) are not supported.
 
 ### Parameters
 
@@ -61,7 +58,7 @@ Lance formation tray dosen't support magnets holes.
 ```isLanceFormation``` if the tray is for lance formation, use only the number of ```rows``` to genrate the tray
 
 
-## Samples
+## What you can do with the script
 
 ### Square 20mm to 25mm sample:
 
@@ -91,6 +88,9 @@ To obtain it just use a negative number for ```height_offset``` like -1
 
 <img src="lance.png" alt= “lance” width="600" >
 
+### Empty standard movement tray
+
+<img src="empty.png" alt= “standardmovement” width="600" >
 
 
 
