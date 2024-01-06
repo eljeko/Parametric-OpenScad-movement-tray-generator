@@ -25,10 +25,6 @@ If you use different values for width and lenght you can generate also adapters 
 
 When setting the value for ```adapted_base_width```and ```adapted_base_length``` add 1mm of tolerance eg: set 21mm for an old 20mm square base. The final "fit" depends also on you printer settings and calibration.  
 
-## Lance formation
-
-At the moment standard classic movement tray (the non adapter version) are not supported.
-
 ### Parameters
 
 ```cols```  Number of columns for this tray
@@ -59,6 +55,8 @@ At the moment standard classic movement tray (the non adapter version) are not s
 
 
 ## What you can do with the script
+
+[Here](paremetric_tray_generator.json) you can find a paremetric saved profiles file for openscad, whe you open the opescad script if is at the same level oft
 
 ### Square 20mm to 25mm sample:
 
@@ -91,6 +89,10 @@ To obtain it just use a negative number for ```height_offset``` like -1
 ### Empty standard movement tray
 
 <img src="empty.png" alt= “standardmovement” width="600" >
+
+### Empty standard Lance movement tray
+
+<img src="lance_movement_standard.png" alt= lance_movement_standard width="600" >
 
 
 

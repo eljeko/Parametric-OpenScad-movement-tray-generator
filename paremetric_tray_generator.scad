@@ -140,7 +140,7 @@ module magnets_holes (cols, rows,  new_base_width, new_base_length, magnets_heig
 }
 
 
-module lance_formation (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset) {
+module lance_formation (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset,  inset, margin_for_empty_tray) {
     
     
     for (thisRow = [0:rows-1]){    
@@ -151,7 +151,7 @@ module lance_formation (cols, rows,  new_base_width, new_base_length, magnets_he
                     //color([0.4, rands(0.01, 1,1)[0],rands(0.01, 1,1)[0] ])
                     color ([0.5, 0.5, 0.5])
                     {
-                        lance_sloped_slot(thisCol+1, thisRow+1 == rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset, 0);
+                        lance_sloped_slot(thisCol+1, thisRow+1 == rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset, margin_for_empty_tray);
                     }    
                 }
             }
@@ -222,6 +222,26 @@ module lance_formation_hole (cols, rows,  new_base_width, new_base_length, magne
     }     
 }
 
+//Standard movement tray
+module lance_formation_tray_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset, inset, margin_for_empty_tray) {
+    
+    gap_w = new_base_width - adapted_base_width;
+    gap_l = new_base_length - adapted_base_length;
+    
+    for (thisRow = [0:rows-1]){    
+
+        translate( [0,thisRow*new_base_length+margin_for_empty_tray/2,height_offset]){
+            for (thisCol = [0:thisRow]){                    
+                translate( [(new_base_width/2)*thisRow-(new_base_width*thisCol)+margin_for_empty_tray/2,0,0]){
+                    color([0.7, 0.7,0.7 ]){
+                        cube([new_base_width, new_base_length*2+margin_for_empty_tray,height+2 ]);
+                    }    
+                }
+            }
+        }
+    }     
+}
+
 module lance_formation_magnets_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset) {
     
     gap_w = new_base_width - adapted_base_width;
@@ -271,10 +291,22 @@ if(!isLanceFormation){
 
 if(isLanceFormation){    
     difference(){      
-        union() {
-            lance_formation (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset);
-        }        
-        lance_formation_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset);    
+        if(!createEmptyMovementTray){
+            union() {
+                lance_formation (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset, inset, 0);
+            }
+        }else{
+            union() {
+                lance_formation (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset, inset, 3);
+            }
+        }
+        
+        if(!createEmptyMovementTray){
+            lance_formation_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset);    
+        }else{
+            lance_formation_tray_hole(cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset, inset, 3);
+        }
+        
         if (magnets_height > 0){
             echo ("magnets lance");
             lance_formation_magnets_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius,height, height_offset);
