@@ -53,10 +53,13 @@ When setting the value for ```adapted_base_width```and ```adapted_base_length```
 
 ```isLanceFormation``` if the tray is for lance formation, use only the number of ```rows``` to genrate the tray
 
+```createEmptyMovementTray``` Create a standard (non an adpater) movement tray for given new_base_length x new_base_width
 
 ## What you can do with the script
 
-[Here](paremetric_tray_generator.json) you can find a paremetric saved profiles file for openscad, whe you open the opescad script if is at the same level oft
+[Here](paremetric_tray_generator.json) you can find a paremetric saved profiles file for openscad: place it in the same folder where you use the script, then you should see a list of profiles:
+
+<img src="profiles.png" alt= profiles width="400" >
 
 ### Square 20mm to 25mm sample:
 
