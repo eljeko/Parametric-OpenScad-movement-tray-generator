@@ -79,6 +79,23 @@
             "new_base_length": "25",
             "new_base_width": "25",
             "rows": "6"
+        },
+        "Base 20mm to 25mm with base marker": {
+            "adapted_base_length": "21.1",
+            "adapted_base_width": "21.1",
+            "cols": "4",
+            "createEmptyMovementTray": "false",
+            "height": "5",
+            "height_offset": "2",
+            "inset": "1",
+            "isLanceFormation": "false",
+            "isRound_adapted": "false",
+            "magnets_height": "0",
+            "magnets_radius": "0",
+            "markBases": "true",
+            "new_base_length": "25",
+            "new_base_width": "25",
+            "rows": "3"
         }
     },
     "fileFormatVersion": "1"

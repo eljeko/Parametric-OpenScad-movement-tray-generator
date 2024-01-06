@@ -55,6 +55,8 @@ When setting the value for ```adapted_base_width```and ```adapted_base_length```
 
 ```createEmptyMovementTray``` Create a standard (non an adpater) movement tray for given new_base_length x new_base_width
 
+```markBases``` Put a mark to show the new base widh/length on the adapter
+
 ## What you can do with the script
 
 [Here](paremetric_tray_generator.json) you can find a paremetric saved profiles file for openscad: place it in the same folder where you use the script, then you should see a list of profiles:
@@ -72,6 +74,14 @@ When setting the value for ```adapted_base_width```and ```adapted_base_length```
 ### Rectangular 25x50mm to 30x60mm sample:
 
 <img src="rectangular.png" alt= “cavalry” width="600" >
+
+### Adapter with marked bases to identify better minis contact in combat
+
+<img src="marked_base.png" alt="marked_base" width="600" >
+
+<img src="marked_base_02.png" alt="marked_base_02" width="600" >
+
+
 
 ### Holed tray
 
