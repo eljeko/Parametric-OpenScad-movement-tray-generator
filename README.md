@@ -59,7 +59,7 @@ When setting the value for ```adapted_base_width```and ```adapted_base_length```
 
 ## What you can do with the script
 
-[Here](paremetric_tray_generator.json) you can find a paremetric saved profiles file for openscad: place it in the same folder where you use the script, then you should see a list of profiles:
+[Here](parametric_tray_generator.json) you can find a paremetric saved profiles file for openscad: place it in the same folder where you use the script, then you should see a list of profiles:
 
 <img src="profiles.png" alt= profiles width="400" >
 

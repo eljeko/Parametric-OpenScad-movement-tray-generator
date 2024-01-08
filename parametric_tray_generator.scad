@@ -31,10 +31,10 @@ height_offset = 2;
 inset = 1;
 //if base adapted are round (in this case adapted_base_width is considered as the diameter of the round base)
 isRound_adapted = false;
-//magnets height (if greater than zero will generate the insets)
-magnets_height = 0;
+//magnets height (if greater than 1 will generate the insets)
+magnets_height = 0.1;
 //magnets radius
-magnets_radius = 0;
+magnets_radius = 0.1;
 //if the tray is for lance formation, use only the number of rows to genrate the tray
 isLanceFormation = false;
 //Create a standard (non an adpater) movement tray for given new_base_length x new_base_width
@@ -121,7 +121,8 @@ module adapted_base_holes_round(cols, rows, height_offset, new_base_width, new_b
            
         }
     }
-}
+}surface("/var/folders/0m/rfm_wx490_ncm2nkym8m87qw0000gp/T/TemporaryItems/NSIRD_screencaptureui_oOBpAq/Screenshot 2024-01-06 at 16.00.00.png");
+
 
 module magnets_holes (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset) {
     
@@ -304,7 +305,7 @@ if(!isLanceFormation){
                 }
             }
             color ([0.7, 0.7, 0.7]) {
-                if (magnets_height > 0){
+                if (magnets_height > 1){
                     echo ("magnets");
                     magnets_holes (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius,height, height_offset);
                 }
@@ -346,7 +347,7 @@ if(isLanceFormation){
             lance_formation_tray_hole(cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset, inset, 3);
         }
         
-        if (magnets_height > 0){
+        if (magnets_height > 1){
             echo ("magnets lance");
             lance_formation_magnets_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius,height, height_offset);
         }
