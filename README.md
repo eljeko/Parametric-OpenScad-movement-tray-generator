@@ -109,7 +109,7 @@ To obtain it just use a negative number for ```height_offset``` like -1
 
 ### One mini adapter
 
-This example shows ho to setup a single base adapter (rember to add tolerance acconrding to your printer settings)
+This example shows how to setup a single base adapter (remeber to add tolerance acconrding to your printer settings)
 
 <img src="one_base_cavalry.png" alt="one_base_cavalry" width="600" >
 
