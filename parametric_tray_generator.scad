@@ -39,7 +39,7 @@ magnets_radius = 0.0;//.1
 is_lance_formation = false;
 //Create a standard (non an adpater) movement tray for given new_base_length x new_base_width
 create_empty_movement_tray = false;
-empty_Movement_Tray_Type="S"; // [4:four walls, 3:Three walls]
+empty_Movement_Tray_Type=""; // [4:four walls, 3:Three walls]
 //Put a mark to show the new base widh/length on the adapter
 markBases = false;
 
@@ -277,7 +277,7 @@ module lance_formation_tray_hole (cols, rows,  new_base_width, new_base_length, 
                         if(empty_Movement_Tray_Type == "3"){
                             cube([new_base_width, new_base_length+margin_for_empty_tray,height+2 ]);            
                         }else{
-                            cube([new_base_width+0.01, new_base_length+0.01,height+2 ]);    
+                            cube([new_base_width+0.05, new_base_length+0.05,height+2 ]);    
                         } 
                     }    
                 }

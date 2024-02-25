@@ -101,11 +101,25 @@ To obtain it just use a negative number for ```height_offset``` like -1
 
 ### Empty standard movement tray
 
+With 3 walls
+
 <img src="empty.png" alt= “standardmovement” width="600" >
+
+With 4 walls
+
+<img src="empty_4_walls.png" alt= “standardmovement” width="600" >
+
 
 ### Empty standard Lance movement tray
 
+With 3 walls
+
 <img src="lance_movement_standard.png" alt="lance_movement_standard" width="600" >
+
+With 4 walls
+
+<img src="empty_lance_4_walls.png" alt="lance_movement_standard" width="600" >
+
 
 ### One mini adapter
 
