@@ -39,7 +39,7 @@ magnets_radius = 0.0;//.1
 is_lance_formation = false;
 //Create a standard (non an adpater) movement tray for given new_base_length x new_base_width
 create_empty_movement_tray = false;
-empty_Movement_Tray_Type=""; // [4:four walls, 3:Three walls]
+empty_Movement_Tray_Type=""; // [4:Four walls, 3:Three walls]
 //Put a mark to show the new base widh/length on the adapter
 markBases = false;
 
