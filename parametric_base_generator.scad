@@ -21,14 +21,16 @@ base_length = 25;
 height_offset = 1.3;
 //Inset of the top of the tray: greater the value greater the slope of the tray
 inset = 1;
-
 //magnets height (if greater than 0.1 will generate the magnet holders)
 magnets_height = 0.1;
 //magnets diameter
 magnets_diameter = 0.1;
 
 base_type = "0"; // [0:Hollow, 1:Solid]
-
+//slotta hole widht
+slotta_width = 2;//0.1
+//slotta type
+slotta_type = "0"; // [0:None, 1:Parallel Center, 2:Parallel 3/4, 3:Diagonal]
 
 module tray(offset, zOffset, height, base_width, base_length, inset) {
     
@@ -70,11 +72,40 @@ module tray(offset, zOffset, height, base_width, base_length, inset) {
            
 }
 
+module slotta (base_width, base_length,slotta_width,slotta_height, slotta_type, offset,inset) {   
+
+    if(slotta_type == "1"){
+        translate( 
+            [inset*2, base_width/2, 0]
+        )
+        cube(size = [base_width-inset*4,slotta_width,slotta_height+0.1]);
+    }
+    
+    if(slotta_type == "2"){
+        translate( 
+            [inset*2, base_width/4, 0]
+        )
+        cube(size = [base_width-inset*4,slotta_width,slotta_height+0.1]);
+    }
+    
+    if(slotta_type == "3"){
+        let(v_slotta_length = sqrt( (base_width-inset*5)*(base_width-inset*5)*2)-slotta_width*1.5 ){
+        translate( 
+            [base_width-(base_width - inset*2)+slotta_width, base_width-(base_width-inset*2)+slotta_width/2, 0]
+        )
+
+        rotate(45)
+
+        cube(size = [v_slotta_length,slotta_width,slotta_height+0.1]);
+        }
+    }    
+}
+
 module magnets_holes (base_width, base_length, magnets_height, magnets_diameter) {   
     translate( 
         [base_width/2,
         base_length/2, 
-        0]
+        -0.1]
     )
     cylinder(d = magnets_diameter, h = magnets_height+0.01,$fn=30);
 }
@@ -90,11 +121,12 @@ difference(){
             tray(height_offset, -1.0, height - height_offset, base_width - (2*height_offset), base_length - (2 * height_offset), inset);
         }   
     }
+    
+    if (magnets_height > 0.1){     
+        magnets_holes (base_width, base_length, magnets_height, magnets_diameter);            
+    }
+    
+    slotta(base_width,base_length,slotta_width,height,slotta_type,height_offset,inset);
+
 }
 
-if (magnets_height > 0.1){
-     difference() {
-        magnets_holes (base_width, base_length, height - 0.1, magnets_diameter + (2 * height_offset));        
-        magnets_holes (base_width, base_length, magnets_height, magnets_diameter);        
-    }
-}
