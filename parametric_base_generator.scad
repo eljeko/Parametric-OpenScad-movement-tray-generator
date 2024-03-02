@@ -27,7 +27,10 @@ magnets_height = 0.1;
 //magnets diameter
 magnets_diameter = 0.1;
 
-module tray(offset, height, base_width, base_length, inset) {
+base_type = "0"; // [0:Hollow, 1:Solid]
+
+
+module tray(offset, zOffset, height, base_width, base_length, inset) {
     
         
         b_total_cols = (base_width);
@@ -35,18 +38,20 @@ module tray(offset, height, base_width, base_length, inset) {
         
         t_total_cols = (base_width - inset *2);
         t_total_rows = (base_length - inset *2);
+    
         translate(
             [offset,
             offset,
-            0]
+            zOffset]
         )
-         polyhedron(
+
+        polyhedron(
             points=[
                     [0,0,0],                        //base bottom left
                     [b_total_cols,0,0],             //base bottom right
                     [b_total_cols,b_total_rows,0],  //base top right
                     [0,b_total_rows,0],             //base top left
-        
+
 
                     [inset,  inset,   height],                              //surface bottom left
                     [inset + t_total_cols, inset,  height],                 //surface bottom right
@@ -62,31 +67,29 @@ module tray(offset, height, base_width, base_length, inset) {
                         [7,6,5,4]
                     ]
         ); 
-   
-}
-
-module magnets_holes (base_width, base_length, magnets_height, magnets_diameter) {
-    
-
-            translate( 
-                        [base_width/2,
-                        base_length/2, 
-                        0]
-            )
-            cylinder(d = magnets_diameter, h = magnets_height+0.01,$fn=30);
-
-}
-
-difference(){        
-         color ([0.5, 0.5, 0.5]) {
-             tray(0, height, base_width, base_length, inset);
-         }
-
-
-        color ([0.7, 0.7, 0.7]) {            
            
-            tray(height_offset, height - height_offset, base_width - (2*height_offset), base_length - (2 * height_offset), inset);
-        } 
+}
+
+module magnets_holes (base_width, base_length, magnets_height, magnets_diameter) {   
+    translate( 
+        [base_width/2,
+        base_length/2, 
+        0]
+    )
+    cylinder(d = magnets_diameter, h = magnets_height+0.01,$fn=30);
+}
+
+difference(){  
+    
+    color ([0.5, 0.5, 0.5]) {
+        tray(0,0, height, base_width, base_length, inset);
+    }
+    
+    if(base_type == "0"){
+        color ([0.7, 0.7, 0.7]) {                   
+            tray(height_offset, -1.0, height - height_offset, base_width - (2*height_offset), base_length - (2 * height_offset), inset);
+        }   
+    }
 }
 
 if (magnets_height > 0.1){
