@@ -5,6 +5,9 @@ This is an [OpenScad](http://openscad.org/index.html) script that can generate a
 
 The script is absolutely parametric and can generate a custom tray for rows/cols tray.
 
+I merged and enanched a new contribution with a script that can genrate bases plese follow the guide here [Parametric base generator](README_bases_generator.md)
+
+
 # How to use
 
 You can use the script and run it with [OpenScad](http://openscad.org/index.html) desktop app.

@@ -1,41 +1,5 @@
 {
     "parameterSets": {
-        "20x20": {
-            "base_length": "20",
-            "base_type": "0",
-            "base_width": "20",
-            "height": "4",
-            "height_offset": "1.3",
-            "inset": "1",
-            "magnets_diameter": "3.4",
-            "magnets_height": "1",
-            "slotta_type": "0",
-            "slotta_width": "2"
-        },
-        "25x25": {
-            "base_length": "25",
-            "base_type": "0",
-            "base_width": "25",
-            "height": "4",
-            "height_offset": "1.3",
-            "inset": "1",
-            "magnets_diameter": "3.4",
-            "magnets_height": "1",
-            "slotta_type": "0",
-            "slotta_width": "2"
-        },
-        "30x30": {
-            "base_length": "30",
-            "base_type": "0",
-            "base_width": "30",
-            "height": "4",
-            "height_offset": "1.3",
-            "inset": "1",
-            "magnets_diameter": "3.4",
-            "magnets_height": "1",
-            "slotta_type": "0",
-            "slotta_width": "2"
-        },
         "40x40": {
             "base_length": "40",
             "base_type": "0",
@@ -54,6 +18,54 @@
             "base_width": "50",
             "height": "4",
             "height_offset": "1.5",
+            "inset": "1",
+            "magnets_diameter": "0.1",
+            "magnets_height": "0.1",
+            "slotta_type": "0",
+            "slotta_width": "2"
+        },
+        "20x20": {
+            "base_length": "20",
+            "base_type": "0",
+            "base_width": "20",
+            "height": "4",
+            "height_offset": "1.3",
+            "inset": "1",
+            "magnets_diameter": "0.1",
+            "magnets_height": "0.1",
+            "slotta_type": "0",
+            "slotta_width": "2"
+        },
+        "25x25": {
+            "base_length": "25",
+            "base_type": "0",
+            "base_width": "25",
+            "height": "4",
+            "height_offset": "1.3",
+            "inset": "1",
+            "magnets_diameter": "0.1",
+            "magnets_height": "0.1",
+            "slotta_type": "0",
+            "slotta_width": "2"
+        },
+        "design default values": {
+            "base_length": "30",
+            "base_type": "0",
+            "base_width": "30",
+            "height": "4",
+            "height_offset": "1.3",
+            "inset": "1",
+            "magnets_diameter": "0.1",
+            "magnets_height": "0.1",
+            "slotta_type": "0",
+            "slotta_width": "2"
+        },
+        "30x30": {
+            "base_length": "30",
+            "base_type": "0",
+            "base_width": "30",
+            "height": "4",
+            "height_offset": "1.3",
             "inset": "1",
             "magnets_diameter": "0.1",
             "magnets_height": "0.1",
