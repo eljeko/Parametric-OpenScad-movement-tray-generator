@@ -120,6 +120,15 @@ With 4 walls
 
 <img src="empty_lance_4_walls.png" alt="lance_movement_standard" width="600" >
 
+### Magnetized Tray (support for 4,5,7,9 magnets)
+
+With ```lower_Movement_tray_magnets``` you can set the number of magnets holes to magnetize your tray/adapter for transportation
+
+<img src="lower_magnets_5.png" alt="lower_magnets_5" width="600" >
+
+<img src="lower_magnets_9.png" alt="lower_magnets_9" width="600" >
+
+
 
 ### One mini adapter
 

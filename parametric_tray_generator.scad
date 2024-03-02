@@ -39,10 +39,10 @@ magnets_radius = 0.0;//.1
 is_lance_formation = false;
 //Put a mark to show the new base widh/length on the adapter
 markBases = false;
-//Create a standard (non an adpater) movement tray for given Type for given new_base_length x new_base_width 
+//Creates a standard (not an adpater) movement tray for given Type for given new_base_length x new_base_width 
 create_Movement_Tray_Type="0"; // [0:None, 4:Four walls, 3:Three walls]
-//Create holes under the tray for magnets
-lower_Movement_tray_magnets=""; // [0:None, 4:Four, 5:Five, 6:Six, 7:Seven, 9:Nine]
+//Creates holes under the tray for magnets
+lower_Movement_tray_magnets="0"; // [0:None, 4:Four, 5:Five, 6:Six, 7:Seven, 9:Nine]
 //Tray magnets height
 lower_Movement_tray_magnets_height = 2.0;//.1
 //Tray magnets radius
