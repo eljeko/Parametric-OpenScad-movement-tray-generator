@@ -37,11 +37,17 @@ magnets_height = 0.0;//.1
 magnets_radius = 0.0;//.1
 //if the tray is for lance formation, use only the number of rows to genrate the tray
 is_lance_formation = false;
-//Create a standard (non an adpater) movement tray for given new_base_length x new_base_width
-create_empty_movement_tray = false;
-empty_Movement_Tray_Type=""; // [4:Four walls, 3:Three walls]
 //Put a mark to show the new base widh/length on the adapter
 markBases = false;
+//Create a standard (non an adpater) movement tray for given Type for given new_base_length x new_base_width 
+create_Movement_Tray_Type="0"; // [0:None, 4:Four walls, 3:Three walls]
+//Create holes under the tray for magnets
+lower_Movement_tray_magnets=""; // [0:None, 4:Four, 5:Five, 6:Six, 7:Seven, 9:Nine]
+//Tray magnets height
+lower_Movement_tray_magnets_height = 2.0;//.1
+//Tray magnets radius
+lower_Movement_tray_magnets_radius = 3.0;//.1
+
 
 module tray(cols, rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset, margin_for_empty_tray) {
     
@@ -77,7 +83,7 @@ module tray(cols, rows, height, new_base_width, new_base_length, adapted_base_wi
 }
 
 //this module will create the hole in the "empty" classic movement tray
-module empty_tray_hole(cols, rows, height_offset, new_base_width,  new_base_length, adapted_base_width, adapted_base_length, inset, margin_for_empty_tray,empty_Movement_Tray_Type) {
+module empty_tray_hole(cols, rows, height_offset, new_base_width,  new_base_length, adapted_base_width, adapted_base_length, inset, margin_for_empty_tray,create_Movement_Tray_Type) {
     
     t_total_cols = (new_base_width * cols ) ;
     t_total_rows = (new_base_length * rows);
@@ -89,7 +95,7 @@ module empty_tray_hole(cols, rows, height_offset, new_base_width,  new_base_leng
                 height_offset]
     )                       
 
-    if(empty_Movement_Tray_Type == "3"){
+    if(create_Movement_Tray_Type == "3"){
         cube([t_total_cols,t_total_rows+margin_for_empty_tray, 30]);            
     }else{
         cube([t_total_cols,t_total_rows, 30]);            
@@ -262,7 +268,7 @@ module lance_formation_hole (cols, rows,  new_base_width, new_base_length, magne
 }
 
 //Standard movement tray
-module lance_formation_tray_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset, inset, margin_for_empty_tray, empty_Movement_Tray_Type) {
+module lance_formation_tray_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset, inset, margin_for_empty_tray, create_Movement_Tray_Type) {
     
     gap_w = new_base_width - adapted_base_width;
     gap_l = new_base_length - adapted_base_length;
@@ -274,7 +280,7 @@ module lance_formation_tray_hole (cols, rows,  new_base_width, new_base_length, 
                 translate( [(new_base_width/2)*thisRow-(new_base_width*thisCol)+margin_for_empty_tray/2,0,0]){
                     color([0.7, 0.7,0.7 ]){
                     
-                        if(empty_Movement_Tray_Type == "3"){
+                        if(create_Movement_Tray_Type == "3"){
                             cube([new_base_width, new_base_length+margin_for_empty_tray,height+2 ]);            
                         }else{
                             cube([new_base_width+0.05, new_base_length+0.05,height+2 ]);    
@@ -309,7 +315,7 @@ module lance_formation_magnets_hole (cols, rows,  new_base_width, new_base_lengt
 if(!is_lance_formation){
     difference(){        
             color ([0.5, 0.5, 0.5]) {
-                if(!create_empty_movement_tray){
+                if(create_Movement_Tray_Type == "0"){
                     tray(cols, rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset, 0);
                 }else{
                     tray(cols, rows, height, new_base_width, new_base_length, adapted_base_width, adapted_base_length, inset, 3);
@@ -317,17 +323,16 @@ if(!is_lance_formation){
             }
             color ([0.7, 0.7, 0.7]) {
                 if (magnets_height > 0){
-                    echo ("magnets");
                     magnets_holes (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius,height, height_offset);
                 }
-                if(!create_empty_movement_tray){
+                if(create_Movement_Tray_Type == "0"){
                     if(!isRound_adapted){
                         adapted_base_holes(cols, rows, height_offset, new_base_width, new_base_length, adapted_base_width, adapted_base_length);
                     }else{
                         adapted_base_holes_round(cols, rows, height_offset, new_base_width, new_base_length, adapted_base_width, adapted_base_length);
                     }
                 }else{//Add here the logic for the 4th back wall
-                    empty_tray_hole(cols, rows, height_offset, new_base_width,  new_base_length, adapted_base_width, adapted_base_length, inset, 3,empty_Movement_Tray_Type);
+                    empty_tray_hole(cols, rows, height_offset, new_base_width,  new_base_length, adapted_base_width, adapted_base_length, inset, 3,create_Movement_Tray_Type);
                 }
             }
             
@@ -335,6 +340,13 @@ if(!is_lance_formation){
                 echo("mark it");
                 mark_new_bases (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset);
             }
+            
+            
+            if(lower_Movement_tray_magnets != "0"){
+                tray_magnets_holes(cols,rows,new_base_width,new_base_length, lower_Movement_tray_magnets_height, lower_Movement_tray_magnets_radius ,toInt(lower_Movement_tray_magnets),false);
+            }
+
+            
         
     }
 }
@@ -342,7 +354,7 @@ if(!is_lance_formation){
 //Lance formation movment tray
 if(is_lance_formation){    
     difference(){      
-        if(!create_empty_movement_tray){
+        if(create_Movement_Tray_Type == "0"){
             union() {
                 lance_formation (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset, inset, 0);
             }
@@ -352,15 +364,117 @@ if(is_lance_formation){
             }
         }
         
-        if(!create_empty_movement_tray){
+        if(create_Movement_Tray_Type == "0"){
             lance_formation_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset);    
         }else{
-            lance_formation_tray_hole(cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset, inset, 3, empty_Movement_Tray_Type);
+            lance_formation_tray_hole(cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, height, height_offset, inset, 3, create_Movement_Tray_Type);
         }
         
         if (magnets_height > 0){
             echo ("magnets lance");
             lance_formation_magnets_hole (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius,height, height_offset);
         }
+        /*
+         if(lower_Movement_tray_magnets != "0"){
+                tray_magnets_holes(cols,rows,new_base_width,new_base_length, lower_Movement_tray_magnets_height, lower_Movement_tray_magnets_radius ,toInt(lower_Movement_tray_magnets),true);
+            }
+*/
     }
 }
+
+//Movement tray lower magnets
+module tray_magnets_holes (cols, rows,  new_base_width, new_base_length, magnets_height, magnets_radius, numbers, isLanceFormation) {
+
+
+    if(isLanceFormation){
+        echo("LAAAAANCEEE", cavalryShift(isLanceFormation, rows,new_base_width ));
+
+    }
+    //Bottom left
+    translate( 
+        [new_base_width/3 + new_base_width * 0 , 
+        new_base_length/3 + new_base_length * 0, 
+       -0.1]
+    )
+    cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);
+
+    //Bottom right
+    translate( 
+        [(new_base_width/3*2) + new_base_width * (cols-1) ,  
+        new_base_length/3 + new_base_length * 0, 
+       -0.1]
+    )    
+    cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);
+
+    //Top left
+    translate( 
+        [new_base_width/3 + new_base_width * 0 ,  
+        (new_base_length/3*2)+ new_base_length * (rows-1),  
+       -0.1]
+    )
+    cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);
+    
+    //Top right
+    translate( 
+        [(new_base_width/3*2) + new_base_width * (cols-1)  ,  
+        (new_base_length/3*2)+ new_base_length * (rows-1),  
+       -0.1]
+    )
+    cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);
+    
+    //middle/center
+    if(numbers == 5 || numbers == 7 || numbers == 9 ){        
+        translate( 
+            [ new_base_width * (cols/2)  , //row
+            new_base_length * (rows/2), //col
+           -0.1]
+        ) 
+        cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);
+    }
+    
+    //middle left/right
+    if(numbers == 7 || numbers == 6 || numbers == 9){        
+        translate( 
+            [new_base_width/3 + new_base_width * 0 , 
+            new_base_length * (rows/2), 
+            -0.1]
+        )
+        cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);
+        
+        translate( 
+            [(new_base_width/3*2) + new_base_width * (cols-1) ,  
+            new_base_length * (rows/2), 
+            -0.1]
+        )   
+
+        cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);
+    }
+    
+    //middle top/bottom
+    if(numbers == 9){        
+        translate( 
+            [ new_base_width * (cols/2)  ,  
+            new_base_length/3 + new_base_length * 0,  
+           -0.1]
+        ) 
+        cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);      
+      
+        translate( 
+            [ new_base_width * (cols/2)  , 
+            (new_base_length/3*2)+ new_base_length * (rows-1), 
+           -0.1]
+        ) 
+        cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);  
+    }
+    
+}
+
+function cavalryShift(isLanceFormation, cols, base_width) =
+    isLanceFormation
+    ? cols* base_width
+    : 0;
+
+function toInt(s, ret=0, i=0) =
+    i >= len(s)
+    ? ret
+    : toInt(s, ret*10 + ord(s[i]) - ord("0"), i+1);
