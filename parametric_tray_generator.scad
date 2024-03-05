@@ -16,7 +16,7 @@ cols = 6;
 //Number of rows for this tray
 rows = 7;
 //heigh (thickness) of this tray
-height = 5;
+height = 5;//.1
 //new base width 
 new_base_width = 25;
 //new base length 
