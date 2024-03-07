@@ -12,7 +12,7 @@
 // limitations under the License.
 
 //height (thickness) of this tray
-height = 4;
+height = 4;//.1
 //base width 
 base_width = 25;
 //base length 
