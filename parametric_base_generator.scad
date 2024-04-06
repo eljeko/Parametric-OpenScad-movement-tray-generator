@@ -12,7 +12,7 @@
 // limitations under the License.
 
 //height (thickness) of this tray
-height = 4;//.1
+height = 4;//0.1
 //base width 
 base_width = 25;
 //base length 
@@ -27,8 +27,10 @@ magnets_height = 0.1;
 magnets_diameter = 0.1;
 
 base_type = "0"; // [0:Hollow, 1:Solid]
-//slotta hole widht
+//slotta hole width
 slotta_width = 2;//0.1
+//slotta hole length
+slotta_length = 18;//0.1
 //slotta type
 slotta_type = "0"; // [0:None, 1:Parallel Center, 2:Parallel 3/4, 3:Diagonal]
 
@@ -76,16 +78,16 @@ module slotta (base_width, base_length,slotta_width,slotta_height, slotta_type, 
 
     if(slotta_type == "1"){
         translate( 
-            [inset*2, base_width/2, -0.1]
+            [(base_width - slotta_length)/2, base_width/2, -0.1]
         )
-        cube(size = [base_width-inset*4,slotta_width,slotta_height+0.2]);
+        cube(size = [slotta_length,slotta_width,slotta_height+0.2]);
     }
     
     if(slotta_type == "2"){
         translate( 
-            [inset*2, base_width/4, -0.1]
+            [(base_width - slotta_length)/2, base_width/4, -0.1]
         )
-        cube(size = [base_width-inset*4,slotta_width,slotta_height+0.2]);
+        cube(size = [slotta_length,slotta_width,slotta_height+0.2]);
     }
     
     if(slotta_type == "3"){
