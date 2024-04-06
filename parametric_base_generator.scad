@@ -91,14 +91,17 @@ module slotta (base_width, base_length,slotta_width,slotta_height, slotta_type, 
     }
     
     if(slotta_type == "3"){
-        let(v_slotta_length = sqrt( (base_width-inset*5)*(base_width-inset*5)*2)-slotta_width*1.5 ){
-        translate( 
-            [base_width-(base_width - inset*2)+slotta_width, base_width-(base_width-inset*2)+slotta_width/2, -0.1]
-        )
 
-        rotate(45)
+        let(cathetus_slotta_width = slotta_width/sqrt(2),cathetus_slotta_lenght = slotta_length/sqrt(2)){
+            echo(">>>>",cathetus_slotta_lenght)
+            translate( 
+                [(base_width/2)-(cathetus_slotta_lenght/2), (base_length/2) -(cathetus_slotta_lenght/2), -0.1]
+            )
 
-        cube(size = [v_slotta_length,slotta_width,slotta_height+0.2]);
+            rotate(45)
+
+            cube(size = [slotta_length,slotta_width,slotta_height+0.2]);
+                    
         }
     }    
 }
