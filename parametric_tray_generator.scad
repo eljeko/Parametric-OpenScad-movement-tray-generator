@@ -147,9 +147,9 @@ module magnets_holes (cols, rows,  new_base_width, new_base_length, magnets_heig
     for (c = [0:cols-1]){
         for (r = [0:rows-1]){
             translate( 
-                        [new_base_width/2 + new_base_width * c , //row
-                        new_base_length/2 + new_base_length * r, //col
-                        height_offset-magnets_height+0.01]
+                [(new_base_width/2) + 1.5 + new_base_width * c , //row
+                (new_base_length/2) + 1.5 + new_base_length * r, //col
+                height_offset-magnets_height+0.01]
             )
             cylinder(r = magnets_radius/2, h = magnets_height+0.01,$fn=20);
            
